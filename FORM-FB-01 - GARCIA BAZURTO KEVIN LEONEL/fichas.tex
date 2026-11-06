@@ -1,0 +1,125 @@
+\documentclass[11pt,a4paper,onecolumn]{article}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{newtxtext}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[backend=biber,style=ieee,sorting=none,url=false,isbn=false]{biblatex}
+\usepackage{csquotes}
+\DefineBibliographyStrings{spanish}{artno = {art\adddot}}
+\usepackage[hidelinks]{hyperref}
+\addbibresource{referencias.bib}
+\pagestyle{empty}
+\begin{document}
+\begin{center}
+{\Large\bfseries Fichas bibliográficas sobre sistemas distribuidos}\par
+\medskip FORM-FB-01
+\par \medskip García Bazurto Kevin
+\end{center}
+
+\section*{Ficha 1 Consistencia en Kubernetes}
+
+\noindent\cite{redzepagic_empirical_2026}\enspace\fullcite{redzepagic_empirical_2026}
+
+\noindent DOI\enspace\href{https://doi.org/10.3390/computers15050282}{\nolinkurl{10.3390/computers15050282}}
+
+\subsection*{Resumen}
+
+En Kubernetes, el rendimiento de una base de datos depende tanto del motor como de su despliegue. El estudio compara PostgreSQL, MySQL, MongoDB, Redis y Cassandra con herramientas de carga específicas, variando la concurrencia y las operaciones. Para Cassandra, contrasta escrituras con ONE y QUORUM y registra rendimiento, latencias y dispersión entre ejecuciones. En la configuración probada, QUORUM reduce la tasa media de escritura y aumenta su variabilidad. La comparación permite distinguir la rapidez habitual de los retrasos que aparecen en una fracción de las peticiones. Los resultados corresponden a ese clúster y requieren controlar las condiciones al intentar reproducirlos.
+
+\subsection*{Dato verificable}
+
+Tabla 20, filas de escritura. La media fue de 157.477 operaciones por segundo con ONE y de 86.340 con QUORUM, los grupos tuvieron cuatro y cinco ejecuciones.
+
+\subsection*{Nota personal}
+
+Este estudio ayuda a comprender por qué una escritura puede tardar más cuando Cassandra necesita confirmar una operación con más réplicas. Si eligiera Cassandra, lo usaría en la sección de “Experimentación propia” para justificar el rendimiento como se indica en el percentil 99 realizado en el estudio al comparar ONE y QUORUM.
+
+\clearpage
+
+\section*{Ficha 2 Escalado y coordinación entre réplicas}
+
+\noindent\cite{nejati_sharif_aldin_watts_2026}\enspace\fullcite{nejati_sharif_aldin_watts_2026}
+
+\noindent DOI\enspace\href{https://doi.org/10.1016/j.future.2025.108210}{\nolinkurl{10.1016/j.future.2025.108210}}
+
+\subsection*{Resumen}
+
+Ahorrar energía en Cassandra requiere entender cómo interactúan la configuración del clúster y la del hardware. Los autores varían la frecuencia del procesador, la replicación, el nivel de consistencia y las cargas de YCSB (Yahoo! Cloud Serving Benchmark). Con un modelo de potencia, estiman el consumo dinámico y seleccionan configuraciones que equilibran energía y tiempo de ejecución dentro de un límite de latencia. Al añadir nodos, el rendimiento también mejora con ONE y replicación completa, mientras que con ALL la coordinación puede aumentar la latencia. Así, el efecto de ampliar el clúster depende de cuántas respuestas debe esperar cada operación.
+
+\subsection*{Dato verificable}
+
+Sección Abstract. Al pasar de 10 a 20 nodos, la latencia de red aumentó hasta un 90\% bajo ALL en las pruebas que se reportaron.
+
+\subsection*{Nota personal}
+
+Este artículo ayuda a entender que añadir nodos puede aumentar el rendimiento y también empeorar en el tiempo de respuesta al usar ALL porque tarda en esperar respuesta de todas las réplicas. Este estudio lo usaría en el análisis de PACELC para discutir el costo de esperar todas las réplicas incluso cuando la red funciona.
+
+\clearpage
+
+\section*{Ficha 3 Consistencia en varias regiones}
+
+\noindent\cite{ferreira_benchmarking_2025}\enspace\fullcite{ferreira_benchmarking_2025}
+
+\noindent DOI\enspace\href{https://doi.org/10.1109/ACCESS.2025.3558923}{\nolinkurl{10.1109/ACCESS.2025.3558923}}
+
+\subsection*{Resumen}
+
+La replicación entre regiones protege el acceso a los datos, pero esperar confirmaciones remotas puede reducir el rendimiento. Los autores comparan Cassandra, MongoDB y Redis en un entorno multirregional de nube. Aplican YCSB para ejecutar cargas con distintas proporciones de operaciones y contrastan configuraciones de consistencia menos exigentes con otras más exigentes. En Cassandra encuentran que algunas cargas procesan muchas menos operaciones por segundo cuando se eleva la exigencia de confirmación. También reportan aumentos del tiempo de ejecución en Redis. El valor del estudio está en mostrar cuánto puede variar el costo según el motor, la carga y la configuración.
+
+\subsection*{Dato verificable}
+
+En la carga A de YCSB, Cassandra pasó de procesar 868,20 a 37,84 operaciones por segundo al cambiar de la configuración de consistencia débil a la fuerte lo cual representa una reducción del 95,64 \%.
+
+Section V, Experimental Results,  A. Impact of Different Workloads.
+
+\subsection*{Nota personal}
+
+Este estudio me ayuda a entender por qué esperar la confirmación de réplicas ubicadas en distintas regiones puede reducir la cantidad de operaciones que se procesan por segundo. Para el TA-IND-01, usaría los resultados de la carga A de YCSB en el análisis comparativo para explicar y sustentar cómo cambió el rendimiento de Cassandra y MongoDB al pasar de la configuración de consistencia débil a la fuerte.
+
+\clearpage
+
+\section*{Ficha 4 Rendimiento según el despliegue}
+
+\noindent\cite{ferreira_impacts_2024}\enspace\fullcite{ferreira_impacts_2024}
+
+\noindent DOI\enspace\href{https://doi.org/10.1186/s13677-024-00716-7}{\nolinkurl{10.1186/s13677-024-00716-7}}
+
+\subsection*{Resumen}
+
+El estudio examina cómo influye la consistencia en el rendimiento de bases NoSQL desplegadas en una región o en varias. Compara Cassandra, MongoDB y Redis bajo diferentes niveles de concurrencia. Los experimentos con Locust registran solicitudes por segundo, tiempos de respuesta y errores, mientras la monitorización de nube aporta datos de recursos. En Cassandra, las pruebas comparan ONE y ALL con tres réplicas. Dentro de una región, algunos escenarios de lectura y escritura pierden rendimiento con la configuración más exigente. La separación por operación y topología permite formular comparaciones entre motores y entender por qué cambia el costo de coordinación.
+
+\subsection*{Dato verificable}
+
+En el despliegue de una sola región, con dos usuarios concurrentes, Cassandra pasó de procesar unas 1500 a unas 970 solicitudes de escritura por segundo al pasar de la configuración de consistencia débil a la fuerte. Esto representa una reducción cercana al 36 \%. El resultado aparece en la figura 2 y en el párrafo sobre el rendimiento de escritura de la subsección Single-region deployment.
+
+\subsection*{Nota personal}
+
+Esta comparación ayuda a entender por qué conviene analizar las lecturas y las escrituras por separado ya que cada una afecta en el rendimiento de respuesta de estas bases de datos, para el TA-IND-01, usaría la figura 2 en el análisis de PACELC para mostrar cómo cambió el rendimiento de escritura al aumentar la exigencia de consistencia en una sola región con dos usuarios concurrentes.
+
+\clearpage
+
+\section*{Ficha 5 Replicación en equipos de bajo consumo}
+
+\noindent\cite{da_silva_evaluation_2023}\enspace\fullcite{da_silva_evaluation_2023}
+
+\noindent DOI\enspace\href{https://doi.org/10.1007/s11227-023-05166-7}{\nolinkurl{10.1007/s11227-023-05166-7}}
+
+\subsection*{Resumen}
+
+Los autores estudian si un clúster económico de placas de bajo consumo puede sostener bases de datos distribuidas. Despliegan Cassandra, HBase y Citus sobre PostgreSQL mediante Docker Swarm en quince Raspberry Pi. Con cargas YCSB comparan el rendimiento al variar el factor de replicación. En su entorno, Cassandra obtiene ventajas cuando el cliente puede especificar el nivel de consistencia. En Citus y HBase, aumentar las réplicas penaliza el rendimiento observado. La prueba ayuda a distinguir la cantidad de copias de la política que decide cuándo responde una operación y muestra por qué ambas variables deben declararse en una comparación experimental.
+
+\subsection*{Dato verificable}
+
+Los autores realizaron las pruebas en un clúster de 15 nodos Raspberry Pi 3 y usaron Docker Swarm para desplegar los servicios. Este dato aparece en la sección 1, “Introduction”.
+
+\subsection*{Nota personal}
+
+Este estudio ayuda a distinguir el número de copias que guarda el sistema de las respuestas que exige para completar una operación. Lo usaría en Tolerancia a fallos para explicar esa distinción y en Experimentación propia para justificar que mantenga fijo el factor de replicación al cambiar el nivel de consistencia.
+
+\section*{Declaración de uso de inteligencia artificial}
+
+Utilicé Codex (OpenAI, versión 6.1 Sol) como apoyo para buscar fuentes académicas confiables y mejorar la redacción del trabajo.
+
+\printbibliography[title={Referencias}]
+
+\end{document}
