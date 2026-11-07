@@ -1,0 +1,126 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{mathptmx} % Times New Roman
+\usepackage[top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\newcommand{\ficha}[6]{%
+  \section*{Ficha bibliográfica #1}
+  \textbf{Título:} #2
+
+  \textbf{DOI:} \href{https://doi.org/#3}{\nolinkurl{#3}}
+
+  \textbf{Resumen:}\\
+  #4
+
+  \textbf{Dato concreto:}\\
+  #5
+
+  \textbf{Nota personal:}\\
+  #6
+
+  \vspace{0.6cm}
+}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\begin{center}
+
+\vspace*{1.5cm}
+
+{\fontsize{22}{26}\selectfont\bfseries UNIVERSIDAD TÉCNICA ESTATAL\\[4pt] DE QUEVEDO\par}
+
+\vspace{1.4cm}
+
+{\large\bfseries FACULTAD DE CIENCIAS DE LA COMPUTACIÓN\par}
+
+\vspace{1.2cm}
+
+{\small\itshape CARRERA INGENIERÍA EN SOFTWARE\par}
+
+\vspace{1.4cm}
+
+{\large TEMA:\par}
+
+\vspace{0.6cm}
+
+{\large\bfseries FICHAS BIBLIOGRÁFICAS: FUNDAMENTOS DE SISTEMAS DISTRIBUIDOS Y ARQUITECTURAS DISTRIBUIDAS\par}
+
+\vspace{1.4cm}
+
+{\large PRESENTADO POR:\par}
+\vspace{2pt}
+{\large\bfseries HERRERA BARCO HUMBERTO ALDAIR\par}
+
+\vspace{1.4cm}
+
+{\large\bfseries FECHA:\par}
+
+\vspace{0.6cm}
+
+{\large\bfseries VIERNES, 6 DE NOVIEMBRE DEL 2026\par}
+{\large (\textit{Semana 02})\par}
+
+\end{center}
+
+\newpage
+
+\ficha{01}
+{Systematic Analysis of DDS Implementations}
+{10.1145/3590140.3629118}
+{El artículo aborda la dificultad de elegir entre implementaciones de DDS, ya que existen parámetros que no están cubiertos por el estándar y las comparaciones no siempre son justas~\cite{bode2023dds}. Para resolverlo, presenta DDS-Perf, una herramienta que permite comparar el rendimiento mediante pruebas y condiciones similares. Se evaluaron cuatro implementaciones en un clúster de Raspberry Pi, midiendo aspectos como el ancho de banda, la latencia y la tasa de mensajes. Los resultados muestran que RTI Connect destaca en ancho de banda y tasa de muestras, mientras que FastDDS obtiene resultados en latencia. Sin embargo, ningún proveedor sobresale en todos los aspectos~\cite{bode2023dds}.}
+{Un dato que se me hizo interesante fue en la prueba de ancho de banda que se le realizaron a RTI Connect y a FastDDS, en la cual RTI Connect alcanzó un ancho de banda mediano de 157 Mbps, mientras que FastDDS obtuvo la menor latencia de extremo a extremo, con 2,84 ms. Me interesó porque se puede ver que el rendimiento de una tecnología de comunicación distribuida debe evaluarse considerando diferentes métricas, no solamente la velocidad de transmisión.\par\medskip\textbf{Ubicación:} páginas 5 y 6; sección 4.1, Benchmark: 1-to-1.}
+{Este artículo me ayudó a entender que en un sistema distribuido la comunicación no depende solo de los mensajes, sino también del middleware y su rendimiento. Aprendí que las implementaciones de DDS pueden variar mucho en ancho de banda y latencia, así que hay que elegir la que mejor se ajuste a lo que necesita el sistema. Me va a servir en la TA-IND-01 para analizar cómo se comunican los componentes del sistema que elija y qué tan importantes son el rendimiento y la confiabilidad.}
+
+\ficha{02}
+{Systematic Analysis of DDS Implementations}
+{10.1016/j.jss.2023.111879}
+{El artículo aborda la falta de estudios que comparen la escalabilidad de distintos frameworks de procesamiento de flujos. Para ello, evalúa herramientas como Flink, Kafka Streams, Hazelcast Jet y Beam mediante pruebas en Kubernetes, utilizando más de 740 horas de experimentos. Los resultados muestran que todos pueden escalar si cuentan con recursos suficientes, pero su rendimiento depende del tipo de trabajo~\cite{henning2024benchmarking}. Ningún framework es superior en todos los casos y Beam presenta mayores requisitos. También se destaca que el escalado vertical puede complementar al horizontal y que elegir un framework adecuado influye directamente en los costes de operación~\cite{henning2024benchmarking}.}
+{En la sección sobre aprendizaje automático con Kafka, el survey reporta un trabajo que distribuye redes neuronales entre la nube y los dispositivos y logra un tiempo de respuesta 45,34\,\% mejor que usar solo la nube.
+\par\medskip\textbf{Ubicación:} página 9; sección VI, Data Handling and Processing, apartado A (ML and Kafka-ML).}
+{Este artículo me ayudó a entender cómo se mide si un sistema distribuido aguanta cuando sube la carga. Aprendí que escalar no es solo meter más instancias, también importa cuántos recursos necesita cada framework, y que no hay uno que sea el mejor en todo, depende del uso. Esto me servirá en la TA-IND-01 para analizar cómo escala el sistema que elegí y qué necesita para seguir funcionando cuando crezca la demanda.}
+
+\ficha{03}
+{Consistency challenges in event-driven microservices: a literature review on data, process, and system evolution}
+{10.1007/s00607-026-01701-5}
+{El estudio aborda la falta de una comprensión unificada sobre cómo mantener la consistencia en arquitecturas de microservicios orientadas a eventos. Para investigarlo, los autores realizaron una revisión de literatura, en la que analizaron 38 estudios seleccionados de un total de 119 documentos~\cite{bacao2026consistency}. Los resultados permitieron identificar tres tipos de consistencia: datos, procesos y evolución del sistema. También se encontraron diferentes estrategias para abordar estos problemas, como el patrón Saga, las transacciones, la orquestación y la coreografía. Finalmente, se concluye que las soluciones existentes suelen tratar estos problemas por separado y que aún existe una brecha entre el diseño y el funcionamiento real de los microservicios~\cite{bacao2026consistency}.}
+{Los autores concluyen que ningún protocolo de comunicación cumple por sí solo con todos los requisitos de las aplicaciones interactivas. Más adelante resumen que la elección depende de la aplicación: MQTT para dispositivos limitados, DDS para tiempo real y Kafka para datos a gran escala
+\par\medskip\textbf{Ubicación:} página 18, sección 4.6 (Summary and Open Challenges); y página 23, sección 6.5 (Summary and Open Challenges).}
+{Este artículo me ayudó a entender que la “consistencia” en microservicios no es un solo problema, sino tres: la de los datos, la de los procesos y la de cómo evoluciona el sistema. Aprendí que de 119 documentos encontrados los autores se quedaron con 38 estudios recientes, y que la mayoría se enfoca en que los datos no se corrompan cuando los microservicios trabajan de forma distribuida. Esto me servirá en la TA-IND-01 para ver qué problemas de consistencia puede tener el sistema que elegí y cómo se podrían resolver.}
+
+\ficha{04}
+{Publish/Subscribe for Edge Intelligence: Systematic Review and Future Prospects}
+{10.1145/3849800}
+{En este artículo se aborda los problemas de comunicación que generalmente surgen con el crecimiento del Internet de las Cosas, donde millones de dispositivos generan grandes cantidades de información que deben procesarse de forma rápida~\cite{saleh2026publish}. Debido a sus limitaciones de memoria, capacidad y batería, muchos dependen de servidores externos para poder realizar estas tareas. Los autores señalan que los métodos tradicionales de comunicación no responden muy bien a las necesidades actuales. Por ello, estudian el modelo Publish/Subscribe, que permite que unos dispositivos publiquen información y otros reciban únicamente los mensajes que les interesan, sin necesidad de conocerse entre ellos~\cite{saleh2026publish}.}
+{De los 38 documentos que quedaron en la revisión, 25 se clasificaron en un tipo de consistencia: 12 de datos, 7 de procesos y 6 de evolución del sistema; los demás no se asignaron a ningún tipo.
+\par\medskip\textbf{Ubicación:} página 16; sección 6.1 (From concept clusters to consistency types), Tabla 4.}
+{Me ayudó a ver cómo mejorar la comunicación entre dispositivos y servicios en un sistema repartido. Para mi proyecto TA-IND-01, el modelo Publish/Subscribe me parece buena opción para que los componentes se comuniquen sin hablar directamente entre todos. También aprendí que hay que elegir bien el protocolo según la rapidez, la capacidad de crecer, la seguridad y los recursos, y me llamó la atención la idea de usar inteligencia artificial para que el sistema se adapte solo a la red.}
+
+\ficha{05}
+{A Survey on Networked Data Streaming With Apache Kafka}
+{10.1109/ACCESS.2023.3303810}
+{El artículo aborda el uso de Apache Kafka para procesar grandes cantidades de datos en tiempo real y cómo su rendimiento depende de la configuración. Para estudiarlo, los autores realizaron una revisión de más de 90 trabajos, de los cuales seleccionaron hasta 70 para analizar. Los resultados destacan que Kafka permite distribuir los mensajes y dividir los datos para procesarlos al mismo tiempo~\cite{10213406}. Además, guardar copias ayuda a mantener el funcionamiento ante fallos y permite integrarse con herramientas como Spark, Storm y Flink. Se aplica en diferentes sectores, aunque todavía existen retos relacionados con la seguridad, la rapidez y la escalabilidad~\cite{10213406}.}
+{El experimento incluyó más de 740 horas de pruebas, con hasta 110 instancias de microservicios procesando hasta un millón de mensajes por segundo, y el resultado fue que todos los frameworks escalaron de forma aproximadamente lineal mientras hubo recursos suficientes.
+\par\medskip\textbf{Ubicación:} páginas 1 y 2; Abstract (p.~1) e Introduction (p.~2).}
+{Este artículo siento que me va a servir mucho para mi proyecto TA-IND-01 porque explica cómo usar Kafka para que las partes de un sistema se hablen entre sí y se enteren de todo al instante. Me quedó claro cómo viajan los datos, cómo se organizan y cómo las copias evitan que todo se caiga si algo falla. Además, muestra ejemplos reales en fábricas y dispositivos conectados, así que me puede ayudar a decidir cómo armar la comunicación en mi proyecto.}
+
+\section*{Declaración de uso de inteligencia artificial}
+ 
+\textbf{Herramienta utilizada:} Claude (Anthropic).
+ 
+\textbf{Para qué se usó:} La herramienta se utilizó únicamente para corregir la redacción y los errores ortográficos de los textos, traducir fragmentos de los artículos consultados y escribir de forma correcta el código LateX del documento.
+ 
+\textbf{Cómo se verificó lo obtenido:} Los títulos, autores, DOI y cifras citados se contrastaron con los artículos originales en PDF. Las traducciones y correcciones de redacción se revisaron para confirmar que no cambiaran el sentido del texto original. Finalmente, el documento se compiló y se revisó completo, incluida la lista de referencias, antes de la entrega.
+
+\bibliographystyle{IEEEtran}
+\bibliography{fuentes}
+
+\end{document}
