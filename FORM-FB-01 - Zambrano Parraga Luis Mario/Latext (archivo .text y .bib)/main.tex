@@ -1,27 +1,650 @@
 
-\documentclass{article}
+\documentclass[11pt,a4paper]{article}
 
+% ==========================================
+% IDIOMA Y TIPOGRAFÍA
+% ==========================================
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{graphicx}
-\usepackage[spanish]{babel}
-\usepackage{cite}
+\usepackage[spanish,es-noshorthands]{babel}
+\usepackage{newtxtext,newtxmath}
+\usepackage{microtype}
+\usepackage{csquotes}
 
-\title{FORM-FB-01 — Fichas bibliográficas: fundamentos de sistemas distribuidos y arquitecturas distribuidas.}
+% ==========================================
+% PÁGINA
+% ==========================================
+\usepackage[
+    margin=2.5cm,
+    headheight=15pt
+]{geometry}
 
-\author{ZAMBRANO PARRAGA LUIS MARIO}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{fancyhdr}
 
-\date{October 2026}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.3}
+
+\setlength{\LTpre}{10pt}
+\setlength{\LTpost}{14pt}
+
+% ==========================================
+% REFERENCIAS IEEE
+% ==========================================
+\usepackage[
+    backend=biber,
+    style=ieee,
+    sorting=none
+]{biblatex}
+
+\addbibresource{referencias.bib}
+
+\usepackage[
+    unicode,
+    hidelinks,
+    breaklinks=true
+]{hyperref}
+
+\urlstyle{same}
+
+% ==========================================
+% ENCABEZADO Y PIE
+% ==========================================
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[L]{
+    \footnotesize FORM-FB-01
+}
+
+\fancyhead[R]{
+    \footnotesize Aplicaciones Distribuidas
+}
+
+\fancyfoot[C]{
+    \footnotesize Página \thepage
+}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\newcommand{\pendiente}[1]{%
+    \textit{[Pendiente: #1]}%
+}
+
+% ==========================================
+% DOCUMENTO
+% ==========================================
+
+\newsavebox{\referenciaUno}
+\newsavebox{\referenciaDos}
+\newsavebox{\referenciaTres}
+\newsavebox{\referenciaCuatro}
+\newsavebox{\referenciaCinco}
 
 \begin{document}
 
-\maketitle
+\sbox{\referenciaUno}{%
+    \parbox{11.5cm}{%
+        \fullcite{10220070}%
+    }%
+}
 
-\section{Introducción}
+\sbox{\referenciaDos}{%
+    \parbox{11.5cm}{%
+        \fullcite{app12115507}%
+    }%
+}
+
+\sbox{\referenciaTres}{%
+    \parbox{11.3cm}{%
+        \fullcite{9717259}%
+    }%
+}
+
+\sbox{\referenciaCuatro}{%
+    \parbox{11.3cm}{%
+        \fullcite{electronics13081452}%
+    }%
+}
+
+\sbox{\referenciaCinco}{%
+    \parbox{11.3cm}{%
+        \fullcite{RODRIGUES2025112500}%
+    }%
+}
+
+\begin{center}
+
+{\large\bfseries
+FICHAS BIBLIOGRÁFICAS}
+
+\vspace{3pt}
+
+{\normalsize
+Fundamentos de sistemas distribuidos
+y arquitecturas de microservicios}
+
+\vspace{5pt}
+
+\rule{\linewidth}{0.8pt}
+
+\end{center}
+
+\textbf{Universidad:}
+Universidad Técnica Estatal de Quevedo
+
+\textbf{Asignatura:}
+Aplicaciones Distribuidas
+
+\textbf{Actividad:}
+FORM-FB-01
+
+\textbf{Estudiante:}
+Zambrano Parraga Luis Mario
+
+\textbf{Fecha:}
+Noviembre de 2026
+
+\vspace{7pt}
+
+% ==========================================
+% FICHA BIBLIOGRÁFICA 01
+% ==========================================
+
+\begin{longtable}{
+|>{\raggedright\arraybackslash\bfseries}p{3.4cm}
+|>{\raggedright\arraybackslash}p{11.6cm}|
+}
+
+\hline
+
+\multicolumn{2}{|c|}{
+\textbf{FICHA BIBLIOGRÁFICA N.º 01}
+}\\
+
+\hline
+
+\multicolumn{2}{|c|}{
+Principios y fundamentos de microservicios
+}\\
+
+\hline
+\endfirsthead
+
+\hline
+\multicolumn{2}{|c|}{
+\textbf{FICHA N.º 01 (CONTINUACIÓN)}
+}\\
+\hline
+\endhead
+
+Referencia bibliográfica (IEEE)
+&
+\usebox{\referenciaUno}
+\\
+\hline
+
+DOI verificado
+&
+\href{
+https://doi.org/10.1109/ACCESS.2023.3305687
+}{
+\nolinkurl{10.1109/ACCESS.2023.3305687}
+}
+\\
+\hline
+
+Resumen de la investigación
+&
+El artículo analiza los principios que orientan el diseño de microservicios y las dificultades que aparecen cuando una aplicación monolítica debe migrar a esta arquitectura. Mediante una revisión de literatura, los autores examinan conceptos clásicos de ingeniería de software y comparan los planteamientos de Parnas, Fowler y Newman. También describen patrones de diseño, ventajas y limitaciones de ambos estilos arquitectónicos. Entre sus hallazgos destacan la importancia de separar responsabilidades según el negocio, ocultar los detalles internos de cada servicio y automatizar los despliegues. La investigación muestra que adoptar microservicios requiere decisiones de diseño y no solo dividir una aplicación existente.
+\\
+\hline
+
+Dato concreto y ubicación
+&
+Los autores comparan nueve principios propuestos por Martin Fowler, siete por Sam Newman y dos planteamientos de David Parnas, estableciendo correspondencias relacionadas con la modularidad y la descomposición en microservicios.
+
+\par\smallskip
+
+\textbf{Ubicación:}
+Página impresa 88349,
+página 11 del archivo PDF.
+
+También puede consultarse la
+Tabla 2, página impresa 88347.
+\\
+\hline
+
+Nota personal y aplicación
+&
+Este artículo me ayudó a comprender que trabajar con microservicios no consiste simplemente en dividir una aplicación en partes pequeñas, sino en definir correctamente las responsabilidades de cada servicio y reducir las dependencias entre ellos. Me llamó la atención cómo los autores relacionan principios clásicos de ingeniería de software con las arquitecturas actuales. También comprendí que una arquitectura monolítica no siempre es una mala opción, especialmente para sistemas pequeños. Considero que esta fuente me servirá en TA-IND-01 para analizar cómo se organizan los componentes del sistema elegido y evaluar si su diseño facilita el mantenimiento y la evolución.
+\\
+\hline
+
+\end{longtable}
+
+% ==========================================
+% FICHA BIBLIOGRÁFICA 02
+% ==========================================
+
+\begin{longtable}{
+|>{\raggedright\arraybackslash\bfseries}p{3.4cm}
+|>{\raggedright\arraybackslash}p{11.6cm}|
+}
+
+\hline
+
+\multicolumn{2}{|c|}{
+\textbf{FICHA BIBLIOGRÁFICA N.º 02}
+}\\
+\hline
+
+\multicolumn{2}{|c|}{
+Desafíos de las arquitecturas de microservicios
+}\\
+\hline
+\endfirsthead
+
+\hline
+\multicolumn{2}{|c|}{
+\textbf{FICHA N.º 02 (CONTINUACIÓN)}
+}\\
+\hline
+\endhead
+
+% REFERENCIA
+Referencia bibliográfica (IEEE)
+&
+\usebox{\referenciaDos}
+\\
+\hline
+
+% DOI
+DOI verificado
+&
+\href{
+https://doi.org/10.3390/app12115507
+}{
+\nolinkurl{10.3390/app12115507}
+}
+\\
+\hline
+
+% RESUMEN
+Resumen de la investigación
+&
+El artículo estudia las dificultades que enfrentan los equipos al adoptar arquitecturas de microservicios, incluso cuando buscan mejorar la escalabilidad y el mantenimiento. Para investigarlas, los autores realizaron una revisión sistemática de literatura siguiendo pautas de Kitchenham y Charters. Examinaron publicaciones desde 2014 hasta febrero de 2022 y seleccionaron 85 estudios para su análisis. A partir de ellos identificaron nueve categorías principales de desafíos, divididas en 40 subcategorías, junto con posibles alternativas de solución. Destacan problemas de orquestación, monitoreo, gestión de datos y descomposición. El trabajo permite reconocer que adoptar microservicios exige evaluar riesgos técnicos y organizativos antes de implementarlos.
+\\
+\hline
+
+% DATO CONCRETO
+Dato concreto y ubicación
+&
+Los investigadores identificaron nueve categorías principales de desafíos y 40 subcategorías, a partir del análisis de 85 estudios primarios sobre arquitecturas de microservicios.
+
+\par\smallskip
+
+\textbf{Ubicación:}
+Resumen (Abstract), página impresa 1,
+página 2 del archivo PDF.
+\\
+\hline
+
+% NOTA PERSONAL
+Nota personal y aplicación
+&
+Algo interesante de analizar este articulo es que la orquestación aparezca en 33 estudios, mientras que la descomposición solo en cuatro. Esto me ayudó a comprender que no basta con dividir una aplicación en servicios pequeños, sino que también es necesario coordinar su funcionamiento, supervisarlos y gestionar correctamente sus datos. Considero que esta investigación me servirá para el informe TA-IND-01, especialmente al identificar los desafíos arquitectónicos del sistema distribuido que analice y evaluar cómo se gestionan las dependencias y la comunicación entre sus servicios.
+\\
+\hline
+
+\end{longtable}
 
 
-% Bibliografía
-\bibliographystyle{IEEEtran}
-\bibliography{referencias}
+% ==========================================
+% FICHA BIBLIOGRÁFICA 03
+% ==========================================
+
+\begin{longtable}{
+|>{\raggedright\arraybackslash\bfseries}p{3.4cm}
+|>{\raggedright\arraybackslash}p{11.6cm}|
+}
+
+\hline
+
+\multicolumn{2}{|c|}{
+\textbf{FICHA BIBLIOGRÁFICA N.º 03}
+}\\
+\hline
+
+\multicolumn{2}{|c|}{
+Comparación entre arquitecturas monolíticas y microservicios
+}\\
+\hline
+\endfirsthead
+
+\hline
+\multicolumn{2}{|c|}{
+\textbf{FICHA N.º 03 (CONTINUACIÓN)}
+}\\
+\hline
+\endhead
+
+% ------------------------------------------
+% REFERENCIA BIBLIOGRÁFICA
+% ------------------------------------------
+
+Referencia bibliográfica (IEEE)
+&
+\usebox{\referenciaTres}
+\\
+\hline
+
+% ------------------------------------------
+% DOI VERIFICADO
+% ------------------------------------------
+
+DOI verificado
+&
+\href{
+https://doi.org/10.1109/ACCESS.2022.3152803
+}{
+\nolinkurl{10.1109/ACCESS.2022.3152803}
+}
+\\
+\hline
+
+% ------------------------------------------
+% RESUMEN DE LA INVESTIGACIÓN
+% ------------------------------------------
+
+Resumen de la investigación
+&
+El artículo compara el rendimiento y la escalabilidad de aplicaciones monolíticas y basadas en microservicios, cuestionando si migrar resulta conveniente para sistemas pequeños. Los investigadores desarrollaron cuatro versiones funcionalmente equivalentes utilizando Java y C\# .NET, y realizaron experimentos en un entorno local y dos servicios de Microsoft Azure. Midieron las solicitudes procesadas por segundo y analizaron distintas configuraciones de recursos. Encontraron que, en una sola máquina, el monolito obtuvo mejor rendimiento, mientras que aumentar instancias no siempre produjo mejoras. Concluyeron que la elección arquitectónica debe considerar las características de la aplicación, los costos y sus necesidades reales antes de migrar.
+\\
+\hline
+
+% ------------------------------------------
+% DATO CONCRETO
+% ------------------------------------------
+
+Dato concreto y ubicación
+&
+Durante las pruebas locales del servicio City, la versión monolítica procesó más del doble de solicitudes que la versión de microservicios implementada en .NET, mientras que en Java alcanzó un rendimiento 1,37 veces superior.
+
+\par\smallskip
+
+\textbf{Ubicación:}
+Sección V.A (Local Environment),
+página impresa 20365,
+página 9 del archivo PDF.
+
+La Figura 4, ubicada en la página
+impresa 20364, presenta los resultados
+gráficos correspondientes.
+\\
+\hline
+
+% ------------------------------------------
+% NOTA PERSONAL
+% ------------------------------------------
+
+Nota personal y aplicación
+&
+Lo que más me llamó la atención fue que la arquitectura monolítica consiguiera mejores resultados en las pruebas locales, incluso cuando normalmente se presenta a los microservicios como una alternativa más moderna. Comprendí que dividir una aplicación también implica mayores necesidades de comunicación y administración de recursos, por lo que no siempre resulta conveniente. Además, me pareció interesante que aumentar el número de instancias pueda llegar a perjudicar el rendimiento. En TA-IND-01 utilizaré esta investigación para evaluar si la arquitectura del sistema elegido responde realmente a sus necesidades de escalabilidad, rendimiento y costos.
+\\
+\hline
+
+\end{longtable}
+
+% ==========================================
+% FICHA BIBLIOGRÁFICA 04
+% ==========================================
+
+\begin{longtable}{
+|>{\raggedright\arraybackslash\bfseries}p{3.4cm}
+|>{\raggedright\arraybackslash}p{11.6cm}|
+}
+
+\hline
+
+\multicolumn{2}{|c|}{
+\textbf{FICHA BIBLIOGRÁFICA N.º 04}
+}\\
+\hline
+
+\multicolumn{2}{|c|}{
+Retorno de microservicios a arquitecturas monolíticas
+}\\
+\hline
+\endfirsthead
+
+\hline
+\multicolumn{2}{|c|}{
+\textbf{FICHA N.º 04 (CONTINUACIÓN)}
+}\\
+\hline
+\endhead
+
+% ------------------------------------------
+% REFERENCIA BIBLIOGRÁFICA
+% ------------------------------------------
+
+Referencia bibliográfica (IEEE)
+&
+\usebox{\referenciaCuatro}
+\\
+\hline
+
+% ------------------------------------------
+% DOI VERIFICADO
+% ------------------------------------------
+
+DOI verificado
+&
+\href{
+https://doi.org/10.3390/electronics13081452
+}{
+\nolinkurl{10.3390/electronics13081452}
+}
+\\
+\hline
+
+% ------------------------------------------
+% RESUMEN DE LA INVESTIGACIÓN
+% ------------------------------------------
+
+Resumen de la investigación
+&
+El artículo examina por qué algunos sistemas basados en microservicios regresan a una arquitectura monolítica. Para investigarlo, los autores realizaron una revisión multivocal que combinó publicaciones académicas y experiencias de profesionales de la industria. Seleccionaron 32 fuentes e identificaron cuatro casos: Istio, el servicio de monitoreo de Prime Video, Segment e InVision. Los principales motivos fueron los costos, la complejidad, la escalabilidad, el rendimiento y la organización. También señalaron seis aspectos que deben considerarse durante la transición, como reorganizar el almacenamiento y conservar un diseño modular. Concluyen que la arquitectura debe elegirse según las necesidades concretas de cada sistema particular.
+\\
+\hline
+
+% ------------------------------------------
+% DATO CONCRETO
+% ------------------------------------------
+
+Dato concreto y ubicación
+&
+En los cuatro casos industriales examinados,
+los costos fueron identificados como motivo
+para regresar de microservicios a una
+arquitectura monolítica. La complejidad y
+la escalabilidad aparecieron en tres casos
+cada una.
+
+\par\smallskip
+
+\textbf{Ubicación:}
+Sección 3.1, Tabla 3
+(Reasons for cases switch back to monolith),
+página impresa 7 de 16,
+página 8 del archivo PDF.
+\\
+\hline
+
+% ------------------------------------------
+% NOTA PERSONAL
+% ------------------------------------------
+
+Nota personal y aplicación
+&
+Lo que me pareció interesante fue que los costos aparecieran como motivo de retorno en los cuatro casos analizados. Esto me ayudó a comprender que dividir una aplicación en muchos servicios no garantiza que sea más fácil de mantener o escalar, ya que también puede aumentar la complejidad y el trabajo de los equipos. Me pareció importante que los autores destaquen la necesidad de conservar un diseño modular, incluso cuando se regresa a una arquitectura monolítica. En TA-IND-01 utilizaré esta investigación para analizar si la arquitectura del sistema elegido responde a sus necesidades técnicas, económicas y organizacionales.
+\\
+\hline
+
+\end{longtable}
+
+
+% ==========================================
+% FICHA BIBLIOGRÁFICA 05
+% ==========================================
+
+\begin{longtable}{
+|>{\raggedright\arraybackslash\bfseries}p{3.4cm}
+|>{\raggedright\arraybackslash}p{11.6cm}|
+}
+
+\hline
+
+\multicolumn{2}{|c|}{
+\textbf{FICHA BIBLIOGRÁFICA N.º 05}
+}\\
+\hline
+
+\multicolumn{2}{|c|}{
+Evaluación del rendimiento y escalabilidad de microservicios
+}\\
+\hline
+\endfirsthead
+
+\hline
+\multicolumn{2}{|c|}{
+\textbf{FICHA N.º 05 (CONTINUACIÓN)}
+}\\
+\hline
+\endhead
+
+% ------------------------------------------
+% REFERENCIA BIBLIOGRÁFICA
+% ------------------------------------------
+
+Referencia bibliográfica (IEEE)
+&
+\usebox{\referenciaCinco}
+\\
+\hline
+
+% ------------------------------------------
+% DOI VERIFICADO
+% ------------------------------------------
+
+DOI verificado
+&
+\href{
+https://doi.org/10.1016/j.jss.2025.112500
+}{
+\nolinkurl{10.1016/j.jss.2025.112500}
+}
+\\
+\hline
+
+% ------------------------------------------
+% RESUMEN DE LA INVESTIGACIÓN
+% ------------------------------------------
+
+Resumen de la investigación
+&
+El artículo analiza cómo se evalúan el rendimiento y la escalabilidad de las arquitecturas de microservicios, considerando que los resultados dependen del diseño, despliegue y uso del sistema. Los autores realizaron una revisión sistemática de literatura publicada entre 2014 y principios de 2024, mediante búsquedas manuales y en Scopus. De 801 registros recuperados automáticamente, seleccionaron 29 estudios primarios al combinar ambas búsquedas. Encontraron mayor atención al escalamiento horizontal que al vertical, mientras que aspectos como la comunicación y la consistencia
+de datos reciben menos evaluaciones comparativas. Concluyen que faltan métodos más integrales y comparables para valorar estas arquitecturas distribuidas modernas.
+\\
+\hline
+
+% ------------------------------------------
+% DATO CONCRETO
+% ------------------------------------------
+
+Dato concreto y ubicación
+&
+De los 29 estudios primarios analizados,
+20 evaluaron variaciones de escalamiento
+horizontal, mientras que ocho examinaron
+variaciones de escalamiento vertical.
+Algunas investigaciones abordaron
+ambas estrategias, por lo que estas
+cantidades no corresponden a grupos
+exclusivos.
+
+\par\smallskip
+
+\textbf{Ubicación:}
+Sección 4.1, Tabla 7
+(Service orchestration),
+página 9 del artículo y del archivo PDF.
+La comparación también se explica en
+la página 7.
+\\
+\hline
+
+% ------------------------------------------
+% NOTA PERSONAL
+% ------------------------------------------
+
+Nota personal y aplicación
+&
+Algo bueno que vi es que muchas investigaciones se enfoquen en aumentar instancias, pero analicen poco cómo se comunican los servicios y cómo manejan sus datos. Antes pensaba que evaluar la escalabilidad consistía principalmente en aumentar recursos y observar si el sistema respondía mejor. Ahora comprendo que también es necesario definir métricas, utilizar cargas de trabajo representativas y considerar los componentes de la arquitectura. En TA-IND-01 aprovecharé esta investigación para identificar qué indicadores conviene examinar y reconocer las limitaciones de las pruebas o evidencias disponibles sobre el sistema distribuido que analice.
+\\
+\hline
+
+\end{longtable}
+
+\clearpage
+
+% ==========================================
+% DECLARACION DE USO DE IA
+% ==========================================
+
+\clearpage
+
+\section*{Declaración de uso de
+inteligencia artificial}
+
+\begin{longtable}{
+|>{\raggedright\arraybackslash\bfseries}p{3.4cm}
+|>{\raggedright\arraybackslash}p{11.6cm}|
+}
+
+\hline
+
+Herramienta y versión
+&
+ChatGPT (OpenAI, GPT-6).
+\\
+\hline
+
+Finalidad
+&
+Se utilizó como apoyo para comprender conceptos de arquitecturas distribuidas, buscar fuentes potenciales para investigar y ayudar con la estructuración del documento en LaTeX.
+\\
+\hline
+
+Procedimiento de verificación
+&
+Se consultaron los cinco artículos originales en formato PDF y en sus respectivas bases de datos en las que están indexadas y se
+contrastaron sus datos bibliográficos con los DOI correspondientes. También se revisaron las secciones, tablas y páginas utilizadas para
+sustentar los datos de cada ficha.
+\\
+\hline
+
+\end{longtable}
+
+% ==========================================
+% REFERENCIAS
+% ==========================================
+
+\printbibliography[
+title={Referencias bibliográficas}
+]
 
 \end{document}
