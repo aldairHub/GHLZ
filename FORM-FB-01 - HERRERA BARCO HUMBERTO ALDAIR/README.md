@@ -9,9 +9,9 @@ Documento en LaTeX con la portada, las fichas bibliográficas, la declaración d
 
 | Archivo | Descripción |
 |---|---|
-| `fichas.tex` | **Archivo principal.** Contiene la portada, las fichas 01 a 05 y la declaración de uso de IA. |
+| `main.tex` | **Archivo principal.** Contiene la portada, las fichas 01 a 05 y la declaración de uso de IA. |
 | `fuentes.bib` | Base de datos de referencias (BibTeX). Se usa con estilo IEEE. |
-| `fichas.pdf` | Resultado de la compilación (se genera al compilar). |
+| `Fichas_bibliográficas__fundamentos_de_sistemas_distribuidos_y_arquitecturas_distribuidas.pdf` | Resultado de la compilación (se genera al compilar). |
 
 Ambos archivos deben estar en la **misma carpeta**. El documento no usa imágenes.
 
