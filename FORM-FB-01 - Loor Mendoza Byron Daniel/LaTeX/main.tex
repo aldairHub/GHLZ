@@ -1,0 +1,284 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[margin=2cm]{geometry}
+\usepackage{csquotes}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage{needspace}
+
+\usepackage[
+    backend=biber,
+    style=ieee,
+    sorting=none,
+    maxbibnames=99,
+    doi=true,
+    url=false,
+    isbn=false
+]{biblatex}
+
+\addbibresource{referencias.bib}
+
+\AtEveryBibitem{\clearlist{language}}
+\DeclareFieldFormat[article]{eid}{Art.\addabbrvspace no.\addnbspace #1}
+
+\usepackage[hidelinks]{hyperref}
+\urlstyle{same}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlength{\emergencystretch}{3em}
+\setlength{\bibitemsep}{4pt}
+\setlength{\bibparsep}{0pt}
+\linespread{1.08}
+\raggedbottom
+
+\titleformat{\section}
+  {\large\bfseries}{}{0pt}{}
+\titleformat{\subsection}
+  {\normalsize\bfseries}{}{0pt}{}
+
+\titlespacing*{\section}{0pt}{10pt}{6pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\newcommand{\tituloficha}[1]{\Needspace{5\baselineskip}\section*{#1}}
+
+\newcommand{\doificha}[1]{\textbf{DOI:} \url{https://doi.org/#1}\par}
+
+\begin{document}
+
+\begin{center}
+    {\large\bfseries FORM-FB-01: Fichas bibliográficas}\\[3pt]
+    Fundamentos de sistemas distribuidos
+    y arquitecturas distribuidas\\[3pt]
+    Byron Daniel Loor Mendoza\\
+    Noviembre de 2026
+\end{center}
+
+\tituloficha{Ficha 1. Tolerancia a fallos en Fission}
+
+\doificha{10.1186/s13677-023-00457-z}
+
+\subsection*{Síntesis del estudio}
+
+El estudio aborda los retrasos de recuperación que pueden producir los
+reintentos ante fallos en plataformas FaaS. Los autores incorporan
+replicación de solicitudes en Fission y la comparan experimentalmente con
+reintentos y activo-reserva, considerando rendimiento, disponibilidad y
+consumo de recursos. Los reintentos resultan apropiados para fallos
+transitorios y consumen menos recursos. Activo-reserva mejora la
+disponibilidad ante fallos prolongados, aunque aumenta el consumo. La
+replicación mantiene el servicio mientras alguna réplica responda y ofrece
+un rendimiento más estable en los escenarios evaluados, con mayor consumo de
+recursos. La elección del mecanismo depende de las necesidades de
+disponibilidad y los recursos disponibles
+\cite{bouizem_integrating_2023}.
+
+\subsection*{Hallazgo documentado}
+
+En los experimentos del artículo, activo-reserva consumió
+más del doble de CPU que los reintentos.
+La evaluación utilizó una aplicación sin estado
+\cite{bouizem_integrating_2023}.
+
+\textbf{Ubicación:} sección \textit{Lessons learned},
+primer y tercer párrafos, respectivamente; páginas 17 y 18 del PDF.
+
+\subsection*{Valoración crítica de la fuente}
+
+Esta comparación me permite relacionar la disponibilidad con el tipo de
+fallo y el consumo de recursos. En el análisis de Fission utilizaré los
+resultados para explicar en qué situaciones conviene recurrir a reintentos,
+activo-reserva o replicación de solicitudes. El mayor consumo de las
+alternativas con réplicas debe considerarse junto con la continuidad que
+ofrecen. También tendré presente que el experimento utilizó una aplicación
+sin estado; esa condición delimita el alcance de sus resultados.
+
+\clearpage
+
+\tituloficha{Ficha 2. Replicación y recuperación del estado}
+
+\doificha{10.1007/s00778-023-00819-8}
+
+\subsection*{Síntesis del estudio}
+
+Este artículo revisa la evolución de los sistemas de procesamiento de
+flujos, con atención a la gestión del estado y la tolerancia a fallos. Los
+autores comparan propuestas de replicación activa y pasiva, almacenamiento
+de datos para recuperación y uso de instantáneas. Explican que recuperar el
+estado interno no garantiza, por sí solo, resultados correctos en los
+sistemas externos que reciben las salidas. Por ello, analizan el problema de
+confirmar esas salidas y evitar duplicados. La revisión permite reconocer
+diferencias entre las garantías de procesamiento y muestra cómo las
+decisiones de recuperación afectan la corrección, la latencia y los recursos
+\cite{fragkoulis_survey_2024}.
+
+\subsection*{Hallazgo documentado}
+
+La revisión compara las estrategias de tolerancia a fallos
+mediante tres dimensiones: replicación, datos conservados
+para recuperación y granularidad de las transacciones
+\cite{fragkoulis_survey_2024}.
+
+\textbf{Ubicación:} sección 5.1.2,
+\textit{Properties of consistency mechanisms},
+puntos 1, 2 y 3; página 17 del PDF (página 523 de la revista).
+
+\subsection*{Valoración crítica de la fuente}
+
+En TA-IND-01 utilizaré esta fuente para distinguir la recuperación de la
+ejecución de la corrección de sus resultados. La comparación será útil al
+analizar las limitaciones de Fission y las necesidades de funciones que
+conservan estado. Los puntos de control servirán como referencia conceptual
+para estudiar otras opciones de recuperación. Antes de atribuir esas
+capacidades a la plataforma, será necesario comprobar su implementación en
+el caso analizado.
+
+\clearpage
+
+\tituloficha{Ficha 3. Garantías de sistemas altamente disponibles}
+
+\doificha{10.1016/j.jpdc.2023.04.008}
+
+\subsection*{Síntesis del estudio}
+
+Los autores analizan las garantías de sistemas replicados que deben
+mantenerse disponibles cuando fallan máquinas o se interrumpe la
+comunicación. Mediante un modelo formal, consideran la recuperación de
+réplicas y distintos comportamientos de los clientes. El estudio muestra que
+ignorar estas condiciones puede llevar a conclusiones equivocadas sobre la
+corrección del sistema. También demuestra que, bajo ciertos supuestos, una
+actualización confirmada puede perderse después de un fallo irrecuperable.
+Los autores denominan operaciones fantasma a este fenómeno y proponen
+criterios de consistencia que consideran los fallos. Su aporte permite
+precisar qué garantías pueden exigirse a un sistema disponible en esas
+condiciones
+\cite{kokocinski_correctness_2023}.
+
+\subsection*{Hallazgo documentado}
+
+Los autores describen una operación fantasma como una
+actualización confirmada u observada que después se pierde
+permanentemente debido a un fallo. El ejemplo considera
+una réplica que confirma una actualización y cae antes
+de asegurar su propagación
+\cite{kokocinski_correctness_2023}.
+
+\textbf{Ubicación:} sección 6.2,
+\textit{Replica crashes and phantom operations}, páginas 10 y 11 del PDF.
+
+\subsection*{Valoración crítica de la fuente}
+
+Este trabajo aporta una pregunta concreta al análisis: ¿qué garantiza una
+respuesta exitosa cuando después ocurre un fallo? Lo utilizaré en el
+apartado de limitaciones de Fission para diferenciar disponibilidad,
+persistencia y consistencia. Me ayudará a precisar qué sucede si una función
+interactúa con almacenamiento externo y una actualización no llega a
+conservarse. La aplicación de sus conclusiones requerirá comprobar que el
+caso estudiado cumple los supuestos del modelo formal.
+
+\clearpage
+
+\tituloficha{Ficha 4. Detección de anomalías y diagnóstico de fallos}
+
+\doificha{10.1007/s10586-026-06095-9}
+
+\subsection*{Síntesis del estudio}
+
+La distribución de una aplicación entre microservicios dificulta detectar
+comportamientos anómalos e identificar sus causas. Este artículo revisa
+investigaciones sobre ambas tareas y organiza los enfoques según los datos
+recogidos, los algoritmos utilizados y las formas de evaluación. Los autores
+examinan técnicas de aprendizaje automático, métodos estadísticos y análisis
+de trazas. La revisión muestra que los resultados dependen de las
+características del sistema y de la información disponible para observarlo.
+También señala dificultades de escalabilidad, explicabilidad y
+funcionamiento en tiempo real. Su principal contribución es una
+clasificación que facilita comparar propuestas y reconocer problemas que
+todavía requieren más investigación específica
+\cite{barata_anomaly_2026}.
+
+\subsection*{Hallazgo documentado}
+
+La revisión concluye que ningún enfoque resuelve por completo
+los desafíos de escalabilidad, explicabilidad y funcionamiento
+en tiempo real de los despliegues modernos de microservicios
+\cite{barata_anomaly_2026}.
+
+\textbf{Ubicación:} sección 7, \textit{Conclusion},
+tercer párrafo; página 32 del PDF.
+
+\subsection*{Valoración crítica de la fuente}
+
+Utilizaré esta revisión en el apartado de observabilidad de Fission. Me
+interesa distinguir entre advertir un comportamiento anómalo y determinar
+qué componente lo provoca. La clasificación del artículo ofrece criterios
+para decidir qué métricas, registros o trazas conviene examinar durante el
+diagnóstico. Su aporte permitirá formular preguntas sobre la información
+disponible en la plataforma y sobre las dificultades de identificar el
+origen de un fallo.
+
+\clearpage
+
+\tituloficha{Ficha 5. Consistencia en arquitecturas orientadas a eventos}
+
+\doificha{10.1007/s00607-026-01701-5}
+
+\subsection*{Síntesis del estudio}
+
+El artículo estudia cómo se define y mantiene la consistencia en
+arquitecturas de microservicios orientadas a eventos. Los autores realizan
+una revisión sistemática basada en los procedimientos de Kitchenham y
+organizan los trabajos seleccionados mediante una matriz de conceptos.
+Distinguen tres dimensiones: consistencia de datos, de procesos y de
+evolución del sistema. Además, relacionan estas dimensiones con estrategias
+como Saga, orquestación y coreografía. Los resultados muestran que las
+investigaciones suelen abordar cada problema por separado, lo que dificulta
+una visión conjunta. Los autores reconocen que la selección de bibliotecas y
+la exclusión de literatura gris limitan el alcance del estudio
+\cite{bacao_consistency_2026}.
+
+\subsection*{Hallazgo documentado}
+
+La búsqueda inicial obtuvo 119 documentos.
+El proceso de selección dejó 37 y se incorporó otro
+mediante búsqueda por referencias, para un total de
+38 documentos incluidos
+\cite{bacao_consistency_2026}.
+
+\textbf{Ubicación:} sección 4.3.1,
+\textit{Describing the selection process}, página 9 del PDF.
+
+\subsection*{Valoración crítica de la fuente}
+
+Esta lectura amplía el análisis de consistencia hacia los procesos en los
+que participan varias funciones o servicios. En TA-IND-01 la utilizaré para
+estudiar qué preguntas surgen cuando una función de Fission forma parte de
+un proceso mayor y una de sus etapas falla. Las tres dimensiones
+identificadas servirán para organizar ese apartado. El comportamiento
+concreto de la plataforma deberá respaldarse con documentación o evidencia
+del caso analizado.
+
+\clearpage
+
+\Needspace{5\baselineskip}
+\section*{Declaración de uso de inteligencia artificial}
+
+Se utilizó ChatGPT (OpenAI) para obtener orientación sobre la selección y
+organización de las fuentes, los requisitos de las fichas y la preparación
+del documento en LaTeX. El apoyo incluyó la aclaración de conceptos,
+propuestas de redacción para los resúmenes y las notas personales, y ajustes
+de estilo y presentación. La información bibliográfica, los DOI y los datos
+concretos se contrastaron con los PDF y las páginas editoriales de las
+publicaciones.
+
+\textbf{Modelo y configuración utilizados:} GPT-6.1 Sol (Alto).
+
+\printbibliography[
+    heading=bibliography,
+    title={Referencias}
+]
+
+\end{document}
